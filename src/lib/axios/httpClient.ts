@@ -5,6 +5,8 @@ import { isTokenExpiringSoon } from "../tokenUtils";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+console.log("API BASE URL:", API_BASE_URL);
+
 if (!API_BASE_URL) {
   throw new Error("API_BASE_URL is not defined in environment variables");
 }
@@ -70,8 +72,8 @@ const axiosInstance = async () => {
     withCredentials: !isServer,
     headers: {
       "Content-Type": "application/json",
-      // ...(cookieHeader ? { Cookie: cookieHeader } : {}),
-      ...(isServer && cookieHeader ? { Cookie: cookieHeader } : {}),
+      ...(cookieHeader ? { Cookie: cookieHeader } : {}),
+      // ...(isServer && cookieHeader ? { Cookie: cookieHeader } : {}),
     },
   });
 

@@ -11,7 +11,7 @@ export const usePayment = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/payment/create",
+        "https://hotel-booking-management-backend-blush.vercel.app/payment/create",
         {
           method: "POST",
           headers: {

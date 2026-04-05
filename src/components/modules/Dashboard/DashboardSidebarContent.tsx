@@ -11,6 +11,7 @@ import { PanelLeftOpen, PanelLeftClose } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 
 interface DashboardSidebarContentProps {
   userInfo: UserInfo;
@@ -37,9 +38,14 @@ const DashboardSidebarContent = ({
       <div className="flex h-16 items-center justify-between border-b px-3 shrink-0">
         {!collapsed && (
           <Link href={dashboardHome}>
-            <span className="text-xl font-bold text-primary whitespace-nowrap">
-              Food Hunt
-            </span>
+            {/* Logo */}
+            <Image
+              src="/images/logo.png"
+              alt="Logo"
+              width={120}
+              height={120}
+              className="object-contain group-hover:scale-105 transition"
+            />
           </Link>
         )}
 

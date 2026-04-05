@@ -6,6 +6,7 @@ import { getIconComponent } from "@/lib/iconMapper";
 import { cn } from "@/lib/utils";
 import { NavSection } from "@/types/dashboard.types";
 import { UserInfo } from "@/types/user.types";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -26,7 +27,13 @@ const DashboardMobileSidebar = ({
       {/* Logo / Brand */}
       <div className="flex h-16 items-center border-b px-6">
         <Link href={dashboardHome}>
-          <span className="text-xl font-bold text-primary">Food Hunt</span>
+          <Image
+            src="/images/logo.png"
+            alt="Logo"
+            width={60}
+            height={60}
+            className="object-contain group-hover:scale-105 transition"
+          />
         </Link>
       </div>
 
