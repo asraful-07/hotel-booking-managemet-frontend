@@ -1,187 +1,312 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { Home, Calendar, User, Clock, ArrowRight, Tag } from "lucide-react";
 
-type BlogPost = {
-  title: string;
-  category: string;
-  date: string;
-  description: string;
-  image: string;
-};
-
-const posts: BlogPost[] = [
+// Blog post data
+const blogPosts = [
   {
-    title: "Designing spaces that breathe",
-    category: "Interior",
-    date: "Apr 18, 2026",
-    description:
-      "Thoughtful interior design is about more than furniture and colour palettes—it is about creating spaces that feel calm, functional, and timeless. By carefully balancing natural light, open layouts, and intentional negative space, every room gains a sense of harmony that enhances everyday living. Discover how small architectural choices can transform an ordinary home into a peaceful environment that encourages comfort, creativity, and meaningful moments.",
+    id: 1,
+    title: "10 Tips for a Perfect Hotel Stay",
+    excerpt:
+      "Discover the secrets to making your hotel experience unforgettable with these expert tips and insider knowledge.",
     image:
-      "https://demo2.themelexus.com/erios2/wp-content/uploads/2026/04/blog-10.jpg",
+      "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&auto=format&fit=crop&q=60",
+    category: "Travel Tips",
+    author: "Sarah Johnson",
+    date: "July 25, 2026",
+    readTime: "5 min read",
+    featured: true,
   },
   {
-    title: "The quiet return of warm tones",
-    category: "Trends",
-    date: "Apr 12, 2026",
-    description:
-      "Design trends are shifting away from cool minimalism and embracing the warmth of earthy neutrals, rich wood textures, and elegant brass accents. These timeless colour combinations create inviting interiors that feel both sophisticated and comfortable. Explore how warm tones can add depth, personality, and a welcoming atmosphere without overwhelming your living space.",
+    id: 2,
+    title: "Exploring Local Cuisine: A Food Lover's Guide",
+    excerpt:
+      "From street food to fine dining, explore the best culinary experiences our city has to offer.",
     image:
-      "https://demo2.themelexus.com/erios2/wp-content/uploads/2026/04/blog-9.jpg",
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&auto=format&fit=crop&q=60",
+    category: "Food & Dining",
+    author: "Michael Chen",
+    date: "July 22, 2026",
+    readTime: "4 min read",
+    featured: false,
   },
   {
-    title: "Small rooms, bigger ideas",
-    category: "Guides",
-    date: "Apr 06, 2026",
-    description:
-      "Limited square footage does not have to limit creativity. Smart furniture placement, multifunctional pieces, clever storage solutions, and thoughtful lighting can make even the smallest room feel spacious and practical. Learn simple design techniques that maximise every corner while maintaining a clean, modern, and visually balanced interior.",
+    id: 3,
+    title: "Wellness Retreat: Rejuvenate Your Mind and Body",
+    excerpt:
+      "Discover our wellness programs designed to help you relax, recharge, and find your inner peace.",
     image:
-      "https://demo2.themelexus.com/erios2/wp-content/uploads/2026/04/blog-7.jpg",
+      "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&auto=format&fit=crop&q=60",
+    category: "Wellness",
+    author: "Emily Davis",
+    date: "July 20, 2026",
+    readTime: "6 min read",
+    featured: false,
   },
   {
-    title: "Materials that age well",
-    category: "Craft",
-    date: "Mar 29, 2026",
-    description:
-      "The best interiors are built with materials that become more beautiful over time. Natural oak develops character, brass gains a unique patina, and linen softens with every passing year. This article explores why investing in authentic, high-quality materials creates lasting value and timeless elegance that outlives temporary design trends.",
+    id: 4,
+    title: "The Ultimate Guide to Business Travel",
+    excerpt:
+      "Everything you need to know about traveling for business, from packing tips to staying productive on the road.",
     image:
-      "https://demo2.themelexus.com/erios2/wp-content/uploads/2026/04/blog-5.jpg",
+      "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&auto=format&fit=crop&q=60",
+    category: "Business",
+    author: "David Wilson",
+    date: "July 18, 2026",
+    readTime: "7 min read",
+    featured: false,
   },
   {
-    title: "A conversation with the studio",
-    category: "Interview",
-    date: "Mar 22, 2026",
-    description:
-      "Go behind the scenes with our lead designer as we discuss the creative journey behind each project. From understanding client lifestyles to refining every detail through sketches, material selection, and collaboration, discover how thoughtful design decisions evolve into beautiful, functional spaces tailored to each client's unique vision.",
+    id: 5,
+    title: "Family Vacation: Activities for All Ages",
+    excerpt:
+      "Plan the perfect family getaway with our curated list of activities that everyone from toddlers to grandparents will love.",
     image:
-      "https://demo2.themelexus.com/erios2/wp-content/uploads/2026/04/blog-3.jpg",
+      "https://images.unsplash.com/photo-1533873984035-25970ab07461?w=800&auto=format&fit=crop&q=60",
+    category: "Family Travel",
+    author: "Lisa Thompson",
+    date: "July 15, 2026",
+    readTime: "5 min read",
+    featured: false,
   },
   {
-    title: "Behind the latest collection",
-    category: "Journal",
-    date: "Mar 15, 2026",
-    description:
-      "Every furniture collection begins with inspiration and countless hours of experimentation. Follow the journey from initial concept sketches to handcrafted prototypes and the final refined pieces. This behind-the-scenes story reveals the craftsmanship, design philosophy, and attention to detail that shape a collection designed to remain relevant for years to come.",
+    id: 6,
+    title: "Sustainable Travel: How to Be an Eco-Friendly Guest",
+    excerpt:
+      "Learn how you can reduce your environmental impact while enjoying a luxurious hotel experience.",
     image:
-      "https://demo2.themelexus.com/erios2/wp-content/uploads/2026/04/blog-1.jpg",
+      "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&auto=format&fit=crop&q=60",
+    category: "Sustainability",
+    author: "Emma Green",
+    date: "July 12, 2026",
+    readTime: "4 min read",
+    featured: false,
   },
 ];
 
-function BlogCard({ post }: { post: BlogPost }) {
-  return (
-    <div className="group relative w-[340px] shrink-0 sm:w-[380px]">
-      <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl">
-        <Image
-          src={post.image}
-          alt={post.title}
-          fill
-          sizes="380px"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-        />
+// Categories for filter
+const categories = [
+  "All",
+  "Travel Tips",
+  "Food & Dining",
+  "Wellness",
+  "Business",
+  "Family Travel",
+  "Sustainability",
+];
 
-        <div
-          className="absolute inset-0 flex flex-col justify-end p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(20,15,8,0) 35%, rgba(20,15,8,0.88) 100%)",
-          }}
-        >
-          <div className="flex translate-y-3 flex-col gap-3 transition-transform duration-300 group-hover:translate-y-0">
-            <div className="flex items-center gap-3 text-xs font-medium text-white/85">
-              <span
-                className="rounded-full px-2.5 py-1"
-                style={{ backgroundColor: "var(--primary)", color: "#fff" }}
-              >
-                {post.category}
-              </span>
-              <span>{post.date}</span>
+export default function Blog() {
+  const [selectedCategory, setSelectedCategory] = React.useState("All");
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  const filteredPosts = blogPosts.filter((post) => {
+    const matchesCategory =
+      selectedCategory === "All" || post.category === selectedCategory;
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredPost = blogPosts.find((post) => post.featured);
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="relative w-full h-[350px] md:h-[420px] overflow-hidden">
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src="https://plus.unsplash.com/premium_photo-1661929519129-7a76946c1d38?w=1200&auto=format&fit=crop&q=80"
+            alt="Blog - Hotel Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4">
+          <div className="flex items-center gap-2 text-sm mb-5">
+            <Link
+              href="/"
+              className="hover:text-[#caa05c] transition flex items-center gap-1"
+            >
+              <Home size={16} />
+              Home
+            </Link>
+            <span className="text-white/50">/</span>
+            <span className="text-[#caa05c]">Blog</span>
+          </div>
+
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            Our Blog
+          </h1>
+          <p className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed">
+            Discover stories, tips, and insights from our hotel experts. Stay
+            inspired for your next journey.
+          </p>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-16 bg-[#caa05c1a]">
+        <div className="max-w-7xl mx-auto px-5">
+          {/* Filter and Search Bar */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-5 mb-10">
+            <div className="flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    selectedCategory === category
+                      ? "bg-[#caa05c] text-white"
+                      : "bg-white text-gray-600 hover:bg-[#caa05c1a]"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
 
-            <p className="line-clamp-3 text-sm leading-relaxed text-white/90">
-              {post.description}
-            </p>
-
-            <a
-              href="#"
-              className="inline-flex w-fit items-center gap-1.5 text-sm font-medium text-white underline-offset-4 hover:underline"
-            >
-              Read more
-              <span aria-hidden="true">&rarr;</span>
-            </a>
+            <div className="w-full md:w-64">
+              <input
+                type="text"
+                placeholder="Search blog..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-4 py-2 rounded-full border border-gray-200 outline-none focus:border-[#caa05c] bg-white"
+              />
+            </div>
           </div>
+
+          {/* Featured Post */}
+          {featuredPost && (
+            <div className="mb-12">
+              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="grid md:grid-cols-2 gap-0">
+                  <div className="relative h-64 md:h-auto min-h-[300px]">
+                    <Image
+                      src={featuredPost.image}
+                      alt={featuredPost.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute top-4 left-4 bg-[#caa05c] text-white px-3 py-1 rounded-full text-xs font-medium">
+                      Featured
+                    </div>
+                  </div>
+                  <div className="p-6 md:p-8 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 text-sm text-[#ab8965] mb-3">
+                      <span className="flex items-center gap-1">
+                        <Tag size={14} />
+                        {featuredPost.category}
+                      </span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1">
+                        <Calendar size={14} />
+                        {featuredPost.date}
+                      </span>
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+                      {featuredPost.title}
+                    </h2>
+                    <p className="text-gray-600 mb-4 leading-relaxed">
+                      {featuredPost.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <User size={14} />
+                        <span>{featuredPost.author}</span>
+                        <span>•</span>
+                        <Clock size={14} />
+                        <span>{featuredPost.readTime}</span>
+                      </div>
+                      <Link
+                        href={`/blog/${featuredPost.id}`}
+                        className="flex items-center gap-1 text-[#caa05c] hover:text-[#ab8965] font-medium transition-colors"
+                      >
+                        Read More
+                        <ArrowRight size={16} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Blog Grid */}
+          {filteredPosts.length === 0 ? (
+            <div className="text-center py-20 bg-white rounded-2xl">
+              <p className="text-gray-500 text-lg">
+                No blog posts found matching your criteria.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredPosts.map((post) => (
+                <div
+                  key={post.id}
+                  className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 group"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 left-3 bg-[#caa05c] text-white px-2.5 py-1 rounded-full text-xs font-medium">
+                      {post.category}
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
+                      <Calendar size={12} />
+                      <span>{post.date}</span>
+                      <span>•</span>
+                      <Clock size={12} />
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 hover:text-[#caa05c] transition-colors">
+                      <Link href={`/blog/${post.id}`}>{post.title}</Link>
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                        <User size={12} />
+                        <span>{post.author}</span>
+                      </div>
+                      <Link
+                        href={`/blog/${post.id}`}
+                        className="text-[#caa05c] hover:text-[#ab8965] text-sm font-medium transition-colors flex items-center gap-1"
+                      >
+                        Read More
+                        <ArrowRight size={14} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Load More Button */}
+          {filteredPosts.length > 6 && (
+            <div className="text-center mt-12">
+              <button className="px-8 py-3 bg-[#caa05c] hover:bg-[#ab8965] text-white font-semibold rounded-full transition-colors">
+                Load More Posts
+              </button>
+            </div>
+          )}
         </div>
-      </div>
-
-      <h3 className="mt-4 text-base font-semibold text-foreground">
-        {post.title}
-      </h3>
-    </div>
-  );
-}
-
-export default function BlogPage() {
-  const loop = [...posts, ...posts];
-
-  return (
-    <div className="w-full bg-background py-16 sm:py-24">
-      <div className="mx-auto mb-10 max-w-3xl px-6 text-center sm:mb-14">
-        <span
-          className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium tracking-wide"
-          style={{
-            backgroundColor: "var(--secondBackground)",
-            color: "var(--secondary)",
-          }}
-        >
-          Blog
-        </span>
-        <h1 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-          Stories from the studio
-        </h1>
-        <p className="mx-auto mt-3 max-w-xl text-balance text-muted-foreground">
-          Notes on design, materials, and the ideas behind our work.
-        </p>
-      </div>
-
-      <div className="marquee-mask relative overflow-hidden">
-        <div className="marquee-track flex w-max gap-6 px-6">
-          {loop.map((post, index) => (
-            <BlogCard key={index} post={post} />
-          ))}
-        </div>
-      </div>
-
-      <style>{`
-        .marquee-track {
-          animation: blog-marquee 22s linear infinite;
-        }
-        .marquee-mask:hover .marquee-track {
-          animation-play-state: paused;
-        }
-        .marquee-mask {
-          -webkit-mask-image: linear-gradient(
-            90deg,
-            transparent 0,
-            #000 5%,
-            #000 95%,
-            transparent 100%
-          );
-          mask-image: linear-gradient(
-            90deg,
-            transparent 0,
-            #000 5%,
-            #000 95%,
-            transparent 100%
-          );
-        }
-        @keyframes blog-marquee {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
-    </div>
+      </section>
+    </>
   );
 }

@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
+// Fake JSON data for customer feedback with image URLs
 const customerFeedback = [
   {
     id: 1,
@@ -12,8 +14,7 @@ const customerFeedback = [
       "The best food app cheaper than the rest. I put my order on here and also did the same for Uber as Uber takes a larger cut.",
     customerName: "Jamie Crawford",
     rating: 5,
-    imageUrl:
-      "https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWFuJTIwcGljfGVufDB8fDB8fHww",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jamie",
   },
   {
     id: 2,
@@ -22,8 +23,7 @@ const customerFeedback = [
       "Very easy to use the app and very good selection of places. I use this app a lot and never had a problem.",
     customerName: "Julie Podmore",
     rating: 5,
-    imageUrl:
-      "https://images.unsplash.com/photo-1645834890548-6d5476948c77?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Julie",
   },
   {
     id: 3,
@@ -32,8 +32,7 @@ const customerFeedback = [
       "The app is smooth. I can find food near me quickly, reorder my usual, and get it delivered easily.",
     customerName: "Alexander McKenzie",
     rating: 5,
-    imageUrl:
-      "https://images.unsplash.com/photo-1692643364123-3406d812e384?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHx8",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alexander",
   },
   {
     id: 4,
@@ -42,8 +41,7 @@ const customerFeedback = [
       "I have used this platform several times now and I'm highly satisfied. Ordering is always smooth.",
     customerName: "Rosemary Anne",
     rating: 5,
-    imageUrl:
-      "https://plus.unsplash.com/premium_photo-1664476788423-7899ac87bd7f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDM2fHx8ZW58MHx8fHx8",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rosemary",
   },
   {
     id: 5,
@@ -52,8 +50,7 @@ const customerFeedback = [
       "Lower service fees, great restaurant selection, and food always arrives hot.",
     customerName: "Michael Thompson",
     rating: 5,
-    imageUrl:
-      "https://plus.unsplash.com/premium_photo-1691784781482-9af9bce05096?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGdpcmwlMjBwaWN8ZW58MHx8MHx8fDA%3D",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
   },
   {
     id: 6,
@@ -62,8 +59,7 @@ const customerFeedback = [
       "From Italian to Thai, Indian to Mexican – there's something for everyone.",
     customerName: "Sarah Williams",
     rating: 5,
-    imageUrl:
-      "https://plus.unsplash.com/premium_photo-1669704098824-3bb06bb771f4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
   },
   {
     id: 7,
@@ -72,8 +68,7 @@ const customerFeedback = [
       "I order twice a week and delivery is always prompt. Highly recommended!",
     customerName: "David Martinez",
     rating: 5,
-    imageUrl:
-      "https://images.unsplash.com/photo-1663417140976-2c8696d0e27d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
   },
   {
     id: 8,
@@ -82,8 +77,7 @@ const customerFeedback = [
       "The promotional offers are fantastic. I've saved a lot of money.",
     customerName: "Emma Johnson",
     rating: 5,
-    imageUrl:
-      "https://plus.unsplash.com/premium_photo-1770663720013-50dd31159fbf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma",
   },
   {
     id: 9,
@@ -92,8 +86,7 @@ const customerFeedback = [
       "When there was an issue with my order, support resolved it immediately.",
     customerName: "Robert Chen",
     rating: 5,
-    imageUrl:
-      "https://plus.unsplash.com/premium_photo-1723377603985-ec9c62ce6a72?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Robert",
   },
   {
     id: 10,
@@ -102,40 +95,31 @@ const customerFeedback = [
       "The quality is consistently high and food arrives fresh every time.",
     customerName: "Lisa Garcia",
     rating: 5,
-    imageUrl:
-      "https://plus.unsplash.com/premium_photo-1663054943700-9dc1a1521479?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHx8",
+    imageUrl: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lisa",
   },
 ];
 
-export default function FeedBack() {
+export default function Review() {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
   const autoScrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const CARD_WIDTH = 280;
   const GAP = 24;
   const SCROLL_AMOUNT = CARD_WIDTH + GAP;
-  const AUTO_SCROLL_INTERVAL = 700;
-  const VISIBLE_CARDS = 3;
+  const AUTO_SCROLL_INTERVAL = 2000;
 
   const scroll = (direction: "left" | "right") => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
-    const newIndex =
-      direction === "left"
-        ? Math.max(0, currentIndex - 1)
-        : Math.min(customerFeedback.length - VISIBLE_CARDS, currentIndex + 1);
-
-    setCurrentIndex(newIndex);
-
-    container.scrollTo({
-      left: newIndex * SCROLL_AMOUNT,
+    container.scrollBy({
+      left: direction === "left" ? -SCROLL_AMOUNT : SCROLL_AMOUNT,
       behavior: "smooth",
     });
 
+    // Reset auto-scroll timer when user manually scrolls
     resetAutoScroll();
   };
 
@@ -143,15 +127,23 @@ export default function FeedBack() {
     const container = scrollContainerRef.current;
     if (!container || isHovering || !isAutoScrolling) return;
 
-    const maxIndex = customerFeedback.length - VISIBLE_CARDS;
-    const nextIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+    // Check if we've reached the end
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    const currentScrollLeft = container.scrollLeft;
 
-    setCurrentIndex(nextIndex);
-
-    container.scrollTo({
-      left: nextIndex * SCROLL_AMOUNT,
-      behavior: "smooth",
-    });
+    if (currentScrollLeft >= maxScrollLeft - 10) {
+      // If at the end, scroll back to start
+      container.scrollTo({
+        left: 0,
+        behavior: "smooth",
+      });
+    } else {
+      // Otherwise, scroll right
+      container.scrollBy({
+        left: SCROLL_AMOUNT,
+        behavior: "smooth",
+      });
+    }
   };
 
   const startAutoScroll = () => {
@@ -208,20 +200,6 @@ export default function FeedBack() {
     }
   }, [isHovering, isAutoScrolling]);
 
-  // Update currentIndex on scroll
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const index = Math.round(container.scrollLeft / SCROLL_AMOUNT);
-      setCurrentIndex(Math.min(index, customerFeedback.length - VISIBLE_CARDS));
-    };
-
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <section className="w-full max-w-7xl mx-auto px-4 pt-14">
       <div
@@ -230,26 +208,47 @@ export default function FeedBack() {
         onMouseLeave={() => setIsHovering(false)}
       >
         {/* Header */}
-        {/* Header Section */}
-        <div className="mx-auto mb-12 max-w-4xl px-6 text-center sm:mb-16">
-          <span
-            className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium tracking-wider uppercase"
-            style={{
-              backgroundColor: "var(--secondBackground)",
-              color: "var(--secondary)",
-            }}
-          >
-            Review
-          </span>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-3xl font-bold text-gray-900">
+            Why Customers Choose FoodHub
+          </h2>
 
-          <h1 className="mt-5 text-2xl font-bold tracking-tight text-foreground sm:text-xl lg:text-3xl">
-            Why Customers Choose Rivora
-          </h1>
+          <div className="flex items-center gap-4">
+            {/* Auto-scroll toggle */}
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">Auto-scroll</span>
+              <button
+                onClick={toggleAutoScroll}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  isAutoScrolling ? "bg-green-500" : "bg-gray-300"
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    isAutoScrolling ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </div>
 
-          <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Experience exceptional comfort, premium service, and memorable stays
-            designed for every guest, and hospitality you can trust.
-          </p>
+            {/* Navigation buttons */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => scroll("left")}
+                className="p-2 rounded-full bg-white shadow hover:bg-gray-100 transition active:scale-95"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="w-5 h-5 text-gray-700" />
+              </button>
+              <button
+                onClick={() => scroll("right")}
+                className="p-2 rounded-full bg-white shadow hover:bg-gray-100 transition active:scale-95"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="w-5 h-5 text-gray-700" />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Carousel Container */}
@@ -287,7 +286,7 @@ export default function FeedBack() {
                           fill
                           className="object-cover"
                           sizes="40px"
-                          unoptimized
+                          unoptimized // DiceBear doesn't require Next.js optimization
                         />
                       </div>
                       <div>
@@ -319,30 +318,25 @@ export default function FeedBack() {
 
         {/* Scroll indicator dots */}
         <div className="flex justify-center gap-2 mt-6">
-          {Array.from({
-            length: customerFeedback.length - VISIBLE_CARDS + 1,
-          }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                const container = scrollContainerRef.current;
-                if (container) {
-                  setCurrentIndex(index);
-                  container.scrollTo({
-                    left: index * SCROLL_AMOUNT,
-                    behavior: "smooth",
-                  });
-                  resetAutoScroll();
-                }
-              }}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                currentIndex === index
-                  ? "bg-gray-800"
-                  : "bg-gray-300 hover:bg-gray-400"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+          {customerFeedback
+            .slice(0, Math.min(5, customerFeedback.length - 3))
+            .map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  const container = scrollContainerRef.current;
+                  if (container) {
+                    container.scrollTo({
+                      left: index * SCROLL_AMOUNT,
+                      behavior: "smooth",
+                    });
+                    resetAutoScroll();
+                  }
+                }}
+                className="w-2 h-2 rounded-full bg-gray-300 hover:bg-gray-400 transition-colors"
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
         </div>
       </div>
 

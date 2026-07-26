@@ -3,6 +3,10 @@ import HotelFacilities from "@/components/modules/Home/useCounter";
 import About from "@/components/modules/Home/About";
 import RoomsCard from "@/components/modules/Home/RoomsCard";
 import Gallery from "@/components/modules/Home/Gallery";
+import FeedBack from "@/components/modules/Home/FeedBack";
+import FAQ from "@/components/modules/Home/FAQ";
+import BookingWidget from "@/components/modules/Home/Calender";
+import BlogList from "@/components/modules/Home/BlogList";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +17,11 @@ export default function HomePage() {
       <About />
       <RoomsCard />
       <HotelFacilities />
+      <FeedBack />
       <Gallery />
+      <BlogList />
+      <FAQ />
+      <BookingWidget />
     </div>
   );
 }

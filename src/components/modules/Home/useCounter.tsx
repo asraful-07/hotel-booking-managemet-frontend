@@ -84,12 +84,16 @@ export default function HotelFacilities() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}{" "}
         <div className="text-center mb-12">
-          {" "}
-          <p className="text-[#caa05c] text-lg font-bold mb-2">
-            {" "}
-            Welcome to GrandStay{" "}
-          </p>{" "}
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <span
+            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium tracking-wide"
+            style={{
+              backgroundColor: "var(--secondBackground)",
+              color: "var(--secondary)",
+            }}
+          >
+            Welcome to GrandStay
+          </span>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
             {" "}
             Hotel Facilities{" "}
           </h2>{" "}

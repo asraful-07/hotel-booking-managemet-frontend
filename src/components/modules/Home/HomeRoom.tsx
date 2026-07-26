@@ -73,9 +73,9 @@ export default function HomeRoom({ rooms }: RoomListProps) {
             className="rounded-2xl shadow-md overflow-hidden group relative"
           >
             <Link href={`/room/${room.id}`}>
-              <CardContent className="p-4">
-                {/* Image Hover Container */}
-                <div className="relative w-full h-48 rounded-xl overflow-hidden group/image">
+              <CardContent className="">
+                {/* Image Container with Heart Overlay */}
+                <div className="relative w-full h-56 rounded-xl overflow-hidden group/image">
                   {/* Default Image */}
                   <Image
                     src={images[0] || "/placeholder.jpg"}
@@ -93,23 +93,18 @@ export default function HomeRoom({ rooms }: RoomListProps) {
                       className="object-cover opacity-0 transition-opacity duration-500 group-hover/image:opacity-100"
                     />
                   )}
-                </div>
 
-                {/* Name and Heart Icon Row */}
-                <div className="flex items-center justify-between mt-3">
-                  <h2 className="text-xl font-semibold">{room.name}</h2>
-
-                  {/* Heart Icon Button */}
+                  {/* Heart Icon Button - Positioned Absolutely on Image */}
                   <button
                     onClick={(e) => handleWishlistClick(e, room.id)}
                     disabled={isAdding}
-                    className="p-2 rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50"
+                    className="absolute top-3 right-3 p-2.5 rounded-full bg-white/90 backdrop-blur-sm shadow-md hover:bg-white transition-all duration-300 disabled:opacity-50 z-10"
                   >
                     <Heart
                       className={`w-5 h-5 transition-all duration-300 ${
                         inWishlist
                           ? "fill-red-500 text-red-500"
-                          : "text-gray-400 hover:text-red-500"
+                          : "text-gray-600 hover:text-red-500"
                       } ${isAdding ? "animate-pulse" : ""}`}
                     />
                   </button>

@@ -87,12 +87,13 @@ export default function Gallery() {
             </span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-[#2c1810] mb-4">
+          <h2 className="text-3xl md:text-3xl font-bold text-[#2c1810] mb-4">
             Captured Moments
           </h2>
 
           <p className="text-[#ab8965] max-w-2xl mx-auto">
-            Explore our stunning spaces through the lens
+            From stylish rooms to exceptional hospitality, every detail is
+            crafted for your comfort.
           </p>
         </motion.div>
 

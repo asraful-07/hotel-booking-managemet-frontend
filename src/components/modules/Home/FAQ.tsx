@@ -15,115 +15,117 @@ type FaqItem = {
 
 const faqs: FaqItem[] = [
   {
-    question: "How long does shipping usually take?",
+    question: "What are your check-in and check-out times?",
     answer:
-      "Most orders arrive within 3–5 business days. You'll get a tracking link by email as soon as your order ships, so you can follow it the whole way.",
+      "Check-in is from 3:00 PM and check-out is until 11:00 AM. Early check-in and late check-out are subject to availability and may incur additional charges.",
   },
   {
-    question: "What's your return policy?",
+    question: "Do you offer airport transportation?",
     answer:
-      "You can return any unused item within 30 days of delivery for a full refund. Start a return from your order page and we'll email you a prepaid label.",
+      "Yes, we offer airport shuttle services at an additional cost. Please contact our front desk at least 24 hours in advance to arrange your transportation.",
   },
   {
-    question: "Do you offer international shipping?",
+    question: "Is breakfast included in the room rate?",
     answer:
-      "Yes, we ship to over 40 countries. Rates and delivery times are calculated at checkout based on your address, so there are no surprises.",
+      "Breakfast is included in select room packages. You can choose to add breakfast to your booking for an additional fee of $25 per person per day.",
   },
   {
-    question: "Can I change or cancel my order after placing it?",
+    question: "Do you have parking facilities?",
     answer:
-      "Orders can be changed or cancelled within 1 hour of purchase. After that, we've likely already started preparing it, so reach out and we'll do our best to help.",
+      "Yes, we offer secure on-site parking for our guests. Self-parking is available at $15 per night, and valet parking is available at $25 per night.",
   },
   {
-    question: "How do I get in touch with support?",
+    question: "Can I bring my pet?",
     answer:
-      "Our team is available every day from 9am to 6pm through live chat or email. Most messages get a reply within a couple of hours.",
+      "We are a pet-friendly hotel! We welcome well-behaved pets with a non-refundable fee of $50 per stay. Please inform us in advance about your pet.",
   },
   {
-    question: "Do you offer gift cards?",
+    question: "Do you have accessible rooms?",
     answer:
-      "Our gift cards are available in $25, $50, and $100 denominations. They can be purchased online and sent via email or printed at home.",
+      "Yes, we offer fully accessible rooms with wheelchair-accessible features, including roll-in showers, grab bars, and lowered countertops. Please request when booking.",
+  },
+  {
+    question: "What amenities are available at the hotel?",
+    answer:
+      "We offer a range of amenities including a fitness center, outdoor pool, spa services, restaurant, bar, business center, and complimentary high-speed Wi-Fi throughout the property.",
+  },
+  {
+    question: "How can I make changes to my reservation?",
+    answer:
+      "You can modify your reservation by contacting our reservations team directly. Changes are subject to availability and may incur rate differences.",
   },
 ];
 
 export default function FAQ() {
   return (
-    <section className="w-full bg-background pb-24">
-      <div className="mx-auto max-w-3xl px-6">
-        <div className="mb-12 text-center sm:mb-16">
-          <span
-            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium tracking-wide"
-            style={{
-              backgroundColor: "var(--secondBackground)",
-              color: "var(--secondary)",
-            }}
-          >
-            FAQ
-          </span>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Frequently asked questions
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-balance text-muted-foreground">
-            Everything you need to know before you get started. Can&apos;t find
-            what you&apos;re looking for? Reach out to our team.
-          </p>
-        </div>
-
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="border-border"
+    <section className="w-full bg-[#caa05c1a] py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Left Section - Heading */}
+          <div className="sticky top-24">
+            <span
+              className="inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium tracking-wide"
+              style={{
+                backgroundColor: "#caa05c1a",
+                color: "#ab8965",
+              }}
             >
-              <AccordionTrigger className="group py-5 text-left text-base font-medium text-foreground hover:no-underline sm:text-lg [&>svg]:hidden">
-                <span className="flex w-full items-center gap-4">
-                  <span
-                    className="text-sm font-medium tabular-nums"
-                    style={{ color: "var(--primary)" }}
-                  >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="flex-1">{faq.question}</span>
-                  <span
-                    className="relative flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-colors duration-200"
-                    style={{ backgroundColor: "var(--secondBackground)" }}
-                  >
-                    <span
-                      className="absolute h-[1.5px] w-3 rounded-full transition-transform duration-200 group-data-[state=open]:rotate-180"
-                      style={{ backgroundColor: "var(--primary)" }}
-                    />
-                    <span
-                      className="absolute h-[1.5px] w-3 rotate-90 rounded-full transition-transform duration-200 group-data-[state=open]:rotate-0"
-                      style={{ backgroundColor: "var(--primary)" }}
-                    />
-                  </span>
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="pb-5 pl-9 pr-10 text-muted-foreground">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-
-        <div
-          className="mt-12 flex flex-col items-center gap-3 rounded-2xl border border-border px-6 py-8 text-center sm:flex-row sm:justify-between sm:text-left"
-          style={{ backgroundColor: "var(--secondBackground)" }}
-        >
-          <div>
-            <p className="font-medium text-foreground">Still have questions?</p>
-            <p className="text-sm text-muted-foreground">
-              Our support team is happy to help you out.
+              FAQ
+            </span>
+            <h2 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-5xl leading-tight">
+              Everything You Need
+              <br />
+              to Know About
+              <br />
+              Staying With Us
+            </h2>
+            <p className="mt-6 text-gray-600 max-w-md leading-relaxed">
+              Find answers to the most commonly asked questions about our hotel,
+              amenities, policies, and services. Can&apos;t find what
+              you&apos;re looking for? Our team is here to help.
             </p>
           </div>
-          <a
-            href="#contact"
-            className="inline-flex shrink-0 items-center justify-center rounded-full px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: "var(--primary)" }}
-          >
-            Contact support
-          </a>
+
+          {/* Right Section - Accordion */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="border-gray-200 last:border-0"
+                >
+                  <AccordionTrigger className="group py-4 text-left text-base font-medium text-gray-900 hover:no-underline sm:text-lg [&>svg]:hidden">
+                    <span className="flex w-full items-center gap-4">
+                      <span
+                        className="text-sm font-medium tabular-nums min-w-[30px]"
+                        style={{ color: "#caa05c" }}
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="flex-1">{faq.question}</span>
+                      <span
+                        className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200"
+                        style={{ backgroundColor: "#caa05c1a" }}
+                      >
+                        <span
+                          className="absolute h-[2px] w-3.5 rounded-full transition-transform duration-200 group-data-[state=open]:rotate-180"
+                          style={{ backgroundColor: "#caa05c" }}
+                        />
+                        <span
+                          className="absolute h-[2px] w-3.5 rotate-90 rounded-full transition-transform duration-200 group-data-[state=open]:rotate-0"
+                          style={{ backgroundColor: "#caa05c" }}
+                        />
+                      </span>
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-4 pl-14 pr-4 text-gray-600 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </div>
     </section>

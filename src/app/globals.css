@@ -118,6 +118,25 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Custom scrollbar styles */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #ab8965;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #8c6d4b;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
