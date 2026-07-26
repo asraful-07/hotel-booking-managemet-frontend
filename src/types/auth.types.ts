@@ -23,3 +23,14 @@ export interface IProfile {
   isDeleted: boolean;
   emailVerified: boolean;
 }
+
+export interface IRegisterResponse {
+  success: boolean;
+  message?: string;
+  user?: {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+  };
+}

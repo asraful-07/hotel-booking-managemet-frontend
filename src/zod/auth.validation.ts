@@ -13,3 +13,17 @@ export const loginZodSchema = z.object({
 });
 
 export type ILoginPayload = z.infer<typeof loginZodSchema>;
+
+export const registerZodSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be less than 50 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .max(100, "Password is too long"),
+});
+
+export type IRegisterPayload = z.infer<typeof registerZodSchema>;
